@@ -63,8 +63,13 @@ jobs:
       # Installed from PyPI at a pinned version rather than via an action, so
       # there is one fewer third-party action in the supply chain and the
       # version is visible in this file.
+      #
+      # Pinning semgrep does not pin its dependencies. 1.145.0 stopped
+      # starting once a newer pydantic removed an internal it imports, and the
+      # job then failed on an ImportError without scanning anything. Bump this
+      # pin when that happens, to a release at least two weeks old.
       - name: Install Semgrep
-        run: pipx install semgrep==1.145.0
+        run: pipx install semgrep==1.179.0
 
       - name: Scan
         # --enable-nosem is explicit rather than assumed: `semgrep ci` honours
