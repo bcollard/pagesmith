@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="manifest.open_in_tab" content="true" />
+    <title>Pagesmith</title>
+    <link rel="icon" href="/icons/icon32.png" />
+    <link rel="stylesheet" href="../../ui/base.css" />
+    <link rel="stylesheet" href="./options.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <img src="/icons/icon48.png" width="32" height="32" alt="" />
+        <h1 data-i18n="optTitle">Pagesmith options</h1>
+        <span id="saved" class="muted" role="status" aria-live="polite" hidden data-i18n="optSaved">Saved</span>
+      </header>
+
+      <form id="form">
+        <fieldset>
+          <legend data-i18n="optSectionCapture">Capture</legend>
+
+          <label for="fixedElements" data-i18n="optFixed">Fixed headers and floating elements</label>
+          <select id="fixedElements" name="fixedElements">
+            <option value="after-first" data-i18n="optFixedAfterFirst">Show once, at the top</option>
+            <option value="always" data-i18n="optFixedAlways">Hide everywhere</option>
+            <option value="never" data-i18n="optFixedNever">Leave as they are</option>
+          </select>
+
+          <label class="check">
+            <input type="checkbox" id="preScroll" name="preScroll" />
+            <span data-i18n="optPreScroll">Scroll through the page first so lazy-loaded images appear</span>
+          </label>
+
+          <label for="captureDelayMs" data-i18n="optDelay">Wait after each scroll (milliseconds)</label>
+          <input type="number" id="captureDelayMs" name="captureDelayMs" min="0" max="3000" step="50" />
+
+          <label for="maxPageHeight" data-i18n="optMaxHeight">Maximum page height (pixels)</label>
+          <input type="number" id="maxPageHeight" name="maxPageHeight" min="2000" max="200000" step="1000" />
+        </fieldset>
+
+        <fieldset>
+          <legend data-i18n="optSectionExport">Export</legend>
+
+          <label for="format" data-i18n="optFormat">Image format</label>
+          <select id="format" name="format">
+            <option value="png" data-i18n="optFormatPng">PNG (lossless)</option>
+            <option value="jpeg" data-i18n="optFormatJpeg">JPEG (smaller files)</option>
+          </select>
+
+          <label for="jpegQuality" data-i18n="optQuality">JPEG quality</label>
+          <input type="range" id="jpegQuality" name="jpegQuality" min="0.5" max="1" step="0.01" />
+
+          <label for="pdfPaper" data-i18n="optPaper">PDF page size</label>
+          <select id="pdfPaper" name="pdfPaper">
+            <option value="a4">A4</option>
+            <option value="letter">Letter</option>
+            <option value="fit" data-i18n="optPaperFit">Fit to content</option>
+          </select>
+
+          <label for="filenameTemplate" data-i18n="optFilename">File name</label>
+          <input type="text" id="filenameTemplate" name="filenameTemplate" maxlength="200" spellcheck="false" />
+          <p class="help muted" data-i18n="optFilenameHelp">Placeholders: {title} {host} {path} {date} {time}</p>
+
+          <label for="keepCaptures" data-i18n="optKeep">Captures to keep</label>
+          <input type="number" id="keepCaptures" name="keepCaptures" min="1" max="200" />
+        </fieldset>
+
+        <fieldset>
+          <legend data-i18n="optShortcut">Keyboard shortcut</legend>
+          <p><kbd id="shortcut">Alt+Shift+S</kbd></p>
+          <p class="muted" data-i18n="optShortcutHelp">Change it in Chrome's extension shortcut settings.</p>
+          <button type="button" id="shortcuts" data-i18n="optShortcutOpen">Open shortcut settings</button>
+        </fieldset>
+      </form>
+
+      <p class="muted" data-i18n="optPrivacy">Captures are stored only in this browser. Pagesmith makes no network requests.</p>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

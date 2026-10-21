@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pagesmith</title>
+    <link rel="icon" href="/icons/icon32.png" />
+    <link rel="stylesheet" href="../../ui/base.css" />
+    <link rel="stylesheet" href="./capture.css" />
+  </head>
+  <body>
+    <header class="toolbar">
+      <div class="meta">
+        <h1 id="title" data-i18n="viewerRecent">Recent captures</h1>
+        <p class="muted"><a id="source" target="_blank" rel="noreferrer noopener"></a> <span id="details"></span></p>
+      </div>
+      <div class="actions" id="actions" hidden>
+        <button id="zoom" data-i18n="viewerActual">Actual size</button>
+        <button id="copy" data-i18n="viewerCopy">Copy</button>
+        <button id="pdf" data-i18n="viewerDownloadPdf">Download PDF</button>
+        <button id="download" class="primary" data-i18n="viewerDownloadImage">Download image</button>
+        <button id="delete" class="danger" data-i18n="viewerDelete">Delete</button>
+      </div>
+    </header>
+
+    <p id="notice" class="notice" hidden></p>
+    <p id="toast" role="status" aria-live="polite" hidden></p>
+
+    <main>
+      <div id="image" class="image fit" hidden></div>
+      <section id="list-section">
+        <h2 data-i18n="viewerRecent">Recent captures</h2>
+        <p id="empty" class="muted" hidden data-i18n="viewerEmpty">No captures yet. Click the Pagesmith button on any page to make one.</p>
+        <ul id="list"></ul>
+      </section>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

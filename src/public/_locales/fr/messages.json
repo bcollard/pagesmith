@@ -1,0 +1,184 @@
+{
+  "extName": {
+    "message": "Pagesmith - Capture d'écran de page entière"
+  },
+  "extDescription": {
+    "message": "Capturez une page web entière en une image ou un PDF. Défilement et assemblage automatiques. Rien ne quitte votre navigateur."
+  },
+  "actionTitle": {
+    "message": "Capturer la page entière"
+  },
+  "popupPreparing": {
+    "message": "Préparation de la page…"
+  },
+  "popupCapturing": {
+    "message": "Capture en cours… $PCT$ %",
+    "placeholders": {
+      "pct": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupHint": {
+    "message": "Vous pouvez fermer cette fenêtre. La capture continue et s’ouvre une fois terminée."
+  },
+  "popupDone": {
+    "message": "Terminé. Ouverture de la capture…"
+  },
+  "popupBusy": {
+    "message": "Une autre capture est en cours. Réessayez quand elle sera terminée."
+  },
+  "errRestricted": {
+    "message": "Chrome n'autorise pas les extensions à capturer cette page."
+  },
+  "errFailed": {
+    "message": "La capture a échoué : $DETAIL$",
+    "placeholders": {
+      "detail": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNoTab": {
+    "message": "L'onglet a été fermé avant la fin de la capture."
+  },
+  "btnRetry": {
+    "message": "Réessayer"
+  },
+  "btnRecent": {
+    "message": "Captures récentes"
+  },
+  "btnOptions": {
+    "message": "Options"
+  },
+  "viewerRecent": {
+    "message": "Captures récentes"
+  },
+  "viewerEmpty": {
+    "message": "Aucune capture pour l'instant. Cliquez sur le bouton Pagesmith sur n'importe quelle page."
+  },
+  "viewerNotFound": {
+    "message": "Cette capture n'existe plus. Les anciennes captures sont supprimées automatiquement."
+  },
+  "viewerDownloadImage": {
+    "message": "Télécharger l'image"
+  },
+  "viewerDownloadPdf": {
+    "message": "Télécharger le PDF"
+  },
+  "viewerCopy": {
+    "message": "Copier"
+  },
+  "viewerCopied": {
+    "message": "Copié dans le presse-papiers"
+  },
+  "viewerCopyMulti": {
+    "message": "Cette capture est découpée en plusieurs images et ne peut pas être copiée en une seule. Téléchargez-la."
+  },
+  "viewerDelete": {
+    "message": "Supprimer"
+  },
+  "viewerFit": {
+    "message": "Ajuster à la fenêtre"
+  },
+  "viewerActual": {
+    "message": "Taille réelle"
+  },
+  "viewerSize": {
+    "message": "$WIDTH$ × $HEIGHT$ px",
+    "placeholders": {
+      "width": {
+        "content": "$1"
+      },
+      "height": {
+        "content": "$2"
+      }
+    }
+  },
+  "viewerParts": {
+    "message": "La page est trop haute pour être encodée en une seule image par Chrome : elle se télécharge en $COUNT$ images. Le PDF les contient toutes.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "viewerPartialVisible": {
+    "message": "Chrome n'autorise pas le défilement de cette page : seule la zone visible a été capturée."
+  },
+  "viewerPartialLimit": {
+    "message": "La page dépasse la hauteur maximale définie dans les options : la capture s’arrête à cette limite."
+  },
+  "optTitle": {
+    "message": "Options de Pagesmith"
+  },
+  "optSaved": {
+    "message": "Enregistré"
+  },
+  "optSectionCapture": {
+    "message": "Capture"
+  },
+  "optSectionExport": {
+    "message": "Export"
+  },
+  "optFixed": {
+    "message": "En-têtes fixes et éléments flottants"
+  },
+  "optFixedAfterFirst": {
+    "message": "Afficher une fois, en haut"
+  },
+  "optFixedAlways": {
+    "message": "Masquer partout"
+  },
+  "optFixedNever": {
+    "message": "Laisser tels quels"
+  },
+  "optPreScroll": {
+    "message": "Faire défiler la page avant la capture pour charger les images différées"
+  },
+  "optDelay": {
+    "message": "Attente après chaque défilement (millisecondes)"
+  },
+  "optMaxHeight": {
+    "message": "Hauteur de page maximale (pixels)"
+  },
+  "optFormat": {
+    "message": "Format d'image"
+  },
+  "optFormatPng": {
+    "message": "PNG (sans perte)"
+  },
+  "optFormatJpeg": {
+    "message": "JPEG (fichiers plus légers)"
+  },
+  "optQuality": {
+    "message": "Qualité JPEG"
+  },
+  "optPaper": {
+    "message": "Format des pages PDF"
+  },
+  "optPaperFit": {
+    "message": "Ajusté au contenu"
+  },
+  "optFilename": {
+    "message": "Nom de fichier"
+  },
+  "optFilenameHelp": {
+    "message": "Variables : {title} {host} {path} {date} {time}"
+  },
+  "optKeep": {
+    "message": "Nombre de captures conservées"
+  },
+  "optShortcut": {
+    "message": "Raccourci clavier"
+  },
+  "optShortcutHelp": {
+    "message": "Modifiable dans les paramètres de raccourcis des extensions de Chrome."
+  },
+  "optShortcutOpen": {
+    "message": "Ouvrir les paramètres de raccourcis"
+  },
+  "optPrivacy": {
+    "message": "Les captures sont stockées uniquement dans ce navigateur. Pagesmith n'effectue aucune requête réseau."
+  }
+}

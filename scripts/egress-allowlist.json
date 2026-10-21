@@ -1,0 +1,34 @@
+{
+  "$comment": [
+    "Every entry here is a hole in Pagesmith's no-egress promise, so every entry",
+    "carries a reason and is reviewed as a change to a security file. See SECURITY.md.",
+    "",
+    "`primitives` and `origins` are empty and should stay empty: the bundle has no",
+    "runtime dependency that embeds a URL, and no fetch, XHR, WebSocket, sendBeacon",
+    "or EventSource at all."
+  ],
+
+  "primitives": [],
+
+  "namespaceUris": {
+    "$comment": [
+      "Identifier URIs, not locations. Nothing dereferences these. Matched as exact",
+      "prefixes rather than by host, so exempting the SVG namespace does not also",
+      "exempt a real <script src=\"https://www.w3.org/...\">."
+    ],
+    "prefixes": [
+      "http://www.w3.org/2000/svg",
+      "http://www.w3.org/1999/xhtml",
+      "http://www.w3.org/1999/xlink",
+      "http://www.w3.org/1998/Math/MathML",
+      "http://www.w3.org/XML/1998/namespace",
+      "http://www.w3.org/2000/xmlns/",
+
+      "https://json-schema.org/draft/2020-12/schema",
+      "http://json-schema.org/draft-07/schema#",
+      "http://json-schema.org/draft-04/schema#"
+    ]
+  },
+
+  "origins": []
+}

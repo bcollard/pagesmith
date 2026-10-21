@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Bands fixture</title>
+    <style>
+      html, body { margin: 0; }
+      .band { height: 500px; }
+      header {
+        position: fixed; top: 0; left: 0; right: 0; height: 60px;
+        background: rgb(255, 0, 255);
+      }
+      .sticky {
+        position: sticky; top: 0; height: 40px;
+        background: rgb(0, 255, 255);
+      }
+    </style>
+  </head>
+  <body>
+    <header></header>
+    <!-- Ten 500px bands in distinct colours, so every seam in the stitched
+         output can be checked by sampling a pixel. The sticky bar sits in the
+         flow after band 3 and must appear exactly once. -->
+    <div class="band" style="background: rgb(200, 0, 0)"></div>
+    <div class="band" style="background: rgb(0, 200, 0)"></div>
+    <div class="band" style="background: rgb(0, 0, 200)"></div>
+    <div class="band" style="background: rgb(200, 200, 0)"></div>
+    <div class="sticky"></div>
+    <div class="band" style="background: rgb(0, 200, 200)"></div>
+    <div class="band" style="background: rgb(200, 0, 200)"></div>
+    <div class="band" style="background: rgb(100, 50, 0)"></div>
+    <div class="band" style="background: rgb(0, 100, 50)"></div>
+    <div class="band" style="background: rgb(50, 0, 100)"></div>
+    <div class="band" style="background: rgb(120, 120, 120)"></div>
+  </body>
+</html>

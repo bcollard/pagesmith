@@ -1,0 +1,184 @@
+{
+  "extName": {
+    "message": "Pagesmith - ページ全体のスクリーンショット"
+  },
+  "extDescription": {
+    "message": "ウェブページ全体を1枚の画像またはPDFとして保存。自動でスクロールしてつなぎ合わせます。データはブラウザの外に出ません。"
+  },
+  "actionTitle": {
+    "message": "ページ全体をキャプチャ"
+  },
+  "popupPreparing": {
+    "message": "ページを準備しています…"
+  },
+  "popupCapturing": {
+    "message": "キャプチャ中… $PCT$%",
+    "placeholders": {
+      "pct": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupHint": {
+    "message": "このポップアップは閉じても構いません。キャプチャは続行され、完了すると開きます。"
+  },
+  "popupDone": {
+    "message": "完了しました。キャプチャを開いています…"
+  },
+  "popupBusy": {
+    "message": "別のキャプチャが実行中です。終了後にもう一度お試しください。"
+  },
+  "errRestricted": {
+    "message": "Chrome ではこのページを拡張機能でキャプチャできません。"
+  },
+  "errFailed": {
+    "message": "キャプチャに失敗しました: $DETAIL$",
+    "placeholders": {
+      "detail": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNoTab": {
+    "message": "キャプチャが終わる前にタブが閉じられました。"
+  },
+  "btnRetry": {
+    "message": "再試行"
+  },
+  "btnRecent": {
+    "message": "最近のキャプチャ"
+  },
+  "btnOptions": {
+    "message": "オプション"
+  },
+  "viewerRecent": {
+    "message": "最近のキャプチャ"
+  },
+  "viewerEmpty": {
+    "message": "まだキャプチャはありません。任意のページで Pagesmith のボタンをクリックしてください。"
+  },
+  "viewerNotFound": {
+    "message": "このキャプチャはもう存在しません。古いキャプチャは自動的に削除されます。"
+  },
+  "viewerDownloadImage": {
+    "message": "画像をダウンロード"
+  },
+  "viewerDownloadPdf": {
+    "message": "PDF をダウンロード"
+  },
+  "viewerCopy": {
+    "message": "コピー"
+  },
+  "viewerCopied": {
+    "message": "クリップボードにコピーしました"
+  },
+  "viewerCopyMulti": {
+    "message": "このキャプチャは複数の画像に分かれているため、1枚としてコピーできません。ダウンロードしてください。"
+  },
+  "viewerDelete": {
+    "message": "削除"
+  },
+  "viewerFit": {
+    "message": "ウィンドウに合わせる"
+  },
+  "viewerActual": {
+    "message": "実際のサイズ"
+  },
+  "viewerSize": {
+    "message": "$WIDTH$ × $HEIGHT$ px",
+    "placeholders": {
+      "width": {
+        "content": "$1"
+      },
+      "height": {
+        "content": "$2"
+      }
+    }
+  },
+  "viewerParts": {
+    "message": "ページが高すぎて Chrome で1枚の画像にできないため、$COUNT$ 枚の画像としてダウンロードされます。PDF にはすべて含まれます。",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "viewerPartialVisible": {
+    "message": "このページは Chrome でスクロールが許可されていないため、表示部分のみをキャプチャしました。"
+  },
+  "viewerPartialLimit": {
+    "message": "ページがオプションで設定した最大の高さを超えているため、そこでキャプチャを終了しました。"
+  },
+  "optTitle": {
+    "message": "Pagesmith のオプション"
+  },
+  "optSaved": {
+    "message": "保存しました"
+  },
+  "optSectionCapture": {
+    "message": "キャプチャ"
+  },
+  "optSectionExport": {
+    "message": "エクスポート"
+  },
+  "optFixed": {
+    "message": "固定ヘッダーとフローティング要素"
+  },
+  "optFixedAfterFirst": {
+    "message": "上部に一度だけ表示"
+  },
+  "optFixedAlways": {
+    "message": "すべて非表示"
+  },
+  "optFixedNever": {
+    "message": "そのままにする"
+  },
+  "optPreScroll": {
+    "message": "遅延読み込みの画像を表示するため、先にページをスクロールする"
+  },
+  "optDelay": {
+    "message": "スクロールごとの待機時間（ミリ秒）"
+  },
+  "optMaxHeight": {
+    "message": "ページの最大の高さ（ピクセル）"
+  },
+  "optFormat": {
+    "message": "画像形式"
+  },
+  "optFormatPng": {
+    "message": "PNG（可逆圧縮）"
+  },
+  "optFormatJpeg": {
+    "message": "JPEG（ファイルが小さい）"
+  },
+  "optQuality": {
+    "message": "JPEG の品質"
+  },
+  "optPaper": {
+    "message": "PDF のページサイズ"
+  },
+  "optPaperFit": {
+    "message": "内容に合わせる"
+  },
+  "optFilename": {
+    "message": "ファイル名"
+  },
+  "optFilenameHelp": {
+    "message": "プレースホルダー: {title} {host} {path} {date} {time}"
+  },
+  "optKeep": {
+    "message": "保存するキャプチャの数"
+  },
+  "optShortcut": {
+    "message": "キーボードショートカット"
+  },
+  "optShortcutHelp": {
+    "message": "Chrome の拡張機能ショートカット設定で変更できます。"
+  },
+  "optShortcutOpen": {
+    "message": "ショートカット設定を開く"
+  },
+  "optPrivacy": {
+    "message": "キャプチャはこのブラウザ内にのみ保存されます。Pagesmith はネットワーク通信を一切行いません。"
+  }
+}

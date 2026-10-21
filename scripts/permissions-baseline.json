@@ -1,0 +1,21 @@
+{
+  "$comment": [
+    "The reviewed permission set. guard-manifest.mjs fails CI when the built",
+    "manifest drifts from this file. Widening it requires updating this file, a",
+    "SECURITY.md changelog entry, and the `permissions-change` label on the PR."
+  ],
+
+  "permissions": ["activeTab", "scripting", "storage"],
+
+  "host_permissions": [],
+
+  "optional_permissions": [],
+
+  "optional_host_permissions": [],
+
+  "justifications": {
+    "activeTab": "The only page access Pagesmith has. Clicking the toolbar button or pressing the shortcut grants temporary access to the one tab in front of the user, which is what chrome.tabs.captureVisibleTab and chrome.scripting.executeScript need. The grant ends when the tab navigates or closes. No site is accessible at install time, and the install prompt shows no host warning.",
+    "scripting": "Injects the page agent (page-agent.js) into the active tab, under the activeTab grant only. The agent measures the page, scrolls it step by step, hides fixed elements after the first frame and restores everything afterwards. It reads no page content and sends nothing back beyond scroll positions and dimensions.",
+    "storage": "storage.local holds the user's settings. storage.session holds the progress of a capture in flight so the popup can show it after being reopened. Captured images are not stored here; they live in the extension's own IndexedDB and never leave the machine."
+  }
+}

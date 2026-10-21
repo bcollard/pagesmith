@@ -1,0 +1,130 @@
+body {
+  background: var(--ps-surface);
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+  background: var(--ps-bg);
+  border-bottom: 1px solid var(--ps-border);
+}
+
+.meta {
+  min-width: 0;
+  flex: 1 1 320px;
+}
+
+.meta h1 {
+  margin: 0;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meta p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meta a {
+  color: inherit;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+#notice,
+#toast {
+  margin: 12px 20px 0;
+}
+
+#toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 8px 14px;
+  border-radius: var(--ps-radius);
+  background: var(--ps-text);
+  color: var(--ps-bg);
+  z-index: 2;
+}
+
+main {
+  padding: 20px;
+}
+
+/* Tiles are positioned in percentages of the full output, so the same markup
+   works at fit-width and at actual size, and a multi-part capture shows as
+   one continuous image. */
+.image {
+  position: relative;
+  margin: 0 auto 32px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.15);
+}
+
+.image img {
+  position: absolute;
+  display: block;
+  user-select: none;
+}
+
+.image.fit {
+  max-width: 100%;
+}
+
+#list-section h2 {
+  font-size: 14px;
+  margin: 0 0 8px;
+}
+
+#list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  max-width: 900px;
+}
+
+#list a {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 10px;
+  border-radius: var(--ps-radius);
+  color: inherit;
+  text-decoration: none;
+}
+
+#list a:hover,
+#list a[aria-current='page'] {
+  background: var(--ps-bg);
+}
+
+#list .when {
+  color: var(--ps-muted);
+  white-space: nowrap;
+}
+
+#list .name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

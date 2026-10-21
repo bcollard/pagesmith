@@ -1,0 +1,184 @@
+{
+  "extName": {
+    "message": "Pagesmith - Screenshot der ganzen Seite"
+  },
+  "extDescription": {
+    "message": "Erfasst eine ganze Webseite als ein Bild oder PDF. Scrollt und fügt automatisch zusammen. Nichts verlässt Ihren Browser."
+  },
+  "actionTitle": {
+    "message": "Ganze Seite erfassen"
+  },
+  "popupPreparing": {
+    "message": "Seite wird vorbereitet…"
+  },
+  "popupCapturing": {
+    "message": "Wird erfasst… $PCT$ %",
+    "placeholders": {
+      "pct": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupHint": {
+    "message": "Sie können dieses Fenster schließen. Die Aufnahme läuft weiter und öffnet sich, sobald sie fertig ist."
+  },
+  "popupDone": {
+    "message": "Fertig. Aufnahme wird geöffnet…"
+  },
+  "popupBusy": {
+    "message": "Eine andere Aufnahme läuft noch. Versuchen Sie es danach erneut."
+  },
+  "errRestricted": {
+    "message": "Chrome erlaubt Erweiterungen nicht, diese Seite zu erfassen."
+  },
+  "errFailed": {
+    "message": "Die Aufnahme ist fehlgeschlagen: $DETAIL$",
+    "placeholders": {
+      "detail": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNoTab": {
+    "message": "Der Tab wurde geschlossen, bevor die Aufnahme fertig war."
+  },
+  "btnRetry": {
+    "message": "Erneut versuchen"
+  },
+  "btnRecent": {
+    "message": "Letzte Aufnahmen"
+  },
+  "btnOptions": {
+    "message": "Optionen"
+  },
+  "viewerRecent": {
+    "message": "Letzte Aufnahmen"
+  },
+  "viewerEmpty": {
+    "message": "Noch keine Aufnahmen. Klicken Sie auf einer beliebigen Seite auf die Pagesmith-Schaltfläche."
+  },
+  "viewerNotFound": {
+    "message": "Diese Aufnahme existiert nicht mehr. Ältere Aufnahmen werden automatisch gelöscht."
+  },
+  "viewerDownloadImage": {
+    "message": "Bild herunterladen"
+  },
+  "viewerDownloadPdf": {
+    "message": "PDF herunterladen"
+  },
+  "viewerCopy": {
+    "message": "Kopieren"
+  },
+  "viewerCopied": {
+    "message": "In die Zwischenablage kopiert"
+  },
+  "viewerCopyMulti": {
+    "message": "Diese Aufnahme besteht aus mehreren Bildern und kann nicht als eines kopiert werden. Laden Sie sie stattdessen herunter."
+  },
+  "viewerDelete": {
+    "message": "Löschen"
+  },
+  "viewerFit": {
+    "message": "An Fenster anpassen"
+  },
+  "viewerActual": {
+    "message": "Originalgröße"
+  },
+  "viewerSize": {
+    "message": "$WIDTH$ × $HEIGHT$ px",
+    "placeholders": {
+      "width": {
+        "content": "$1"
+      },
+      "height": {
+        "content": "$2"
+      }
+    }
+  },
+  "viewerParts": {
+    "message": "Die Seite ist zu hoch, als dass Chrome sie als ein Bild speichern könnte. Sie wird als $COUNT$ Bilder heruntergeladen; das PDF enthält alle.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "viewerPartialVisible": {
+    "message": "Chrome erlaubt kein Scrollen auf dieser Seite, daher wurde nur der sichtbare Bereich erfasst."
+  },
+  "viewerPartialLimit": {
+    "message": "Die Seite ist höher als die in den Optionen festgelegte Maximalhöhe; die Aufnahme endet dort."
+  },
+  "optTitle": {
+    "message": "Pagesmith-Optionen"
+  },
+  "optSaved": {
+    "message": "Gespeichert"
+  },
+  "optSectionCapture": {
+    "message": "Aufnahme"
+  },
+  "optSectionExport": {
+    "message": "Export"
+  },
+  "optFixed": {
+    "message": "Fixierte Kopfzeilen und schwebende Elemente"
+  },
+  "optFixedAfterFirst": {
+    "message": "Einmal oben anzeigen"
+  },
+  "optFixedAlways": {
+    "message": "Überall ausblenden"
+  },
+  "optFixedNever": {
+    "message": "Unverändert lassen"
+  },
+  "optPreScroll": {
+    "message": "Seite vorher durchscrollen, damit nachgeladene Bilder erscheinen"
+  },
+  "optDelay": {
+    "message": "Wartezeit nach jedem Scrollen (Millisekunden)"
+  },
+  "optMaxHeight": {
+    "message": "Maximale Seitenhöhe (Pixel)"
+  },
+  "optFormat": {
+    "message": "Bildformat"
+  },
+  "optFormatPng": {
+    "message": "PNG (verlustfrei)"
+  },
+  "optFormatJpeg": {
+    "message": "JPEG (kleinere Dateien)"
+  },
+  "optQuality": {
+    "message": "JPEG-Qualität"
+  },
+  "optPaper": {
+    "message": "PDF-Seitenformat"
+  },
+  "optPaperFit": {
+    "message": "An Inhalt anpassen"
+  },
+  "optFilename": {
+    "message": "Dateiname"
+  },
+  "optFilenameHelp": {
+    "message": "Platzhalter: {title} {host} {path} {date} {time}"
+  },
+  "optKeep": {
+    "message": "Anzahl gespeicherter Aufnahmen"
+  },
+  "optShortcut": {
+    "message": "Tastenkürzel"
+  },
+  "optShortcutHelp": {
+    "message": "Änderbar in den Tastenkürzel-Einstellungen für Erweiterungen in Chrome."
+  },
+  "optShortcutOpen": {
+    "message": "Tastenkürzel-Einstellungen öffnen"
+  },
+  "optPrivacy": {
+    "message": "Aufnahmen werden nur in diesem Browser gespeichert. Pagesmith stellt keine Netzwerkanfragen."
+  }
+}

@@ -1,0 +1,45 @@
+body {
+  width: 320px;
+}
+
+main {
+  padding: 14px 16px 16px;
+  display: grid;
+  gap: 10px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+}
+
+p {
+  margin: 0;
+}
+
+.bar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--ps-surface);
+  border: 1px solid var(--ps-border);
+  overflow: hidden;
+}
+
+#bar-fill {
+  height: 100%;
+  width: 0;
+  background: var(--ps-accent);
+  transition: width 0.2s ease-out;
+}
+
+#hint {
+  font-size: 12px;
+}
+
+footer {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}

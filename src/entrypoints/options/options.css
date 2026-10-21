@@ -1,0 +1,74 @@
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+header h1 {
+  font-size: 20px;
+  margin: 0;
+  flex: 1;
+}
+
+fieldset {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 20px;
+  padding: 14px 16px 16px;
+  border: 1px solid var(--ps-border);
+  border-radius: var(--ps-radius);
+}
+
+legend {
+  padding: 0 6px;
+  font-weight: 600;
+}
+
+label {
+  margin-top: 8px;
+}
+
+label.check {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+input[type='number'],
+input[type='text'],
+select {
+  font: inherit;
+  padding: 6px 8px;
+  border: 1px solid var(--ps-border);
+  border-radius: var(--ps-radius);
+  background: var(--ps-bg);
+  color: var(--ps-text);
+  max-width: 100%;
+}
+
+.help {
+  margin: 0;
+  font-size: 12px;
+}
+
+kbd {
+  padding: 2px 6px;
+  border: 1px solid var(--ps-border);
+  border-radius: 4px;
+  background: var(--ps-surface);
+}
+
+fieldset p {
+  margin: 0;
+}
+
+fieldset button {
+  justify-self: start;
+}

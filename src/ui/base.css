@@ -1,0 +1,108 @@
+/* Shared by the popup, the viewer and the options page. System fonts only:
+   a web font would be a remote request, and the egress guard forbids one. */
+
+:root {
+  --ps-accent: #1d5fa8;
+  --ps-accent-hover: #164a83;
+  --ps-bg: #ffffff;
+  --ps-surface: #f3f6fa;
+  --ps-border: #d6dde6;
+  --ps-text: #14161a;
+  --ps-muted: #5b6573;
+  --ps-danger: #b3261e;
+  --ps-warn-bg: #fff6e0;
+  --ps-warn-border: #e8c46a;
+  --ps-radius: 8px;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ps-accent: #6aa7ea;
+    --ps-accent-hover: #8dbcf0;
+    --ps-bg: #16181c;
+    --ps-surface: #1f2329;
+    --ps-border: #333a44;
+    --ps-text: #e8ebef;
+    --ps-muted: #9aa4b2;
+    --ps-danger: #f2a39c;
+    --ps-warn-bg: #3a2f12;
+    --ps-warn-border: #7a6224;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--ps-bg);
+  color: var(--ps-text);
+  font: 14px/1.45 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+button,
+.button {
+  font: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--ps-border);
+  border-radius: var(--ps-radius);
+  background: var(--ps-surface);
+  color: var(--ps-text);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+button:hover:not(:disabled),
+.button:hover {
+  border-color: var(--ps-accent);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button.primary {
+  background: var(--ps-accent);
+  border-color: var(--ps-accent);
+  color: #fff;
+}
+
+button.primary:hover:not(:disabled) {
+  background: var(--ps-accent-hover);
+}
+
+button.danger {
+  color: var(--ps-danger);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ps-accent);
+  outline-offset: 2px;
+}
+
+.muted {
+  color: var(--ps-muted);
+}
+
+.notice {
+  padding: 8px 12px;
+  border: 1px solid var(--ps-warn-border);
+  border-radius: var(--ps-radius);
+  background: var(--ps-warn-bg);
+}
+
+.error {
+  color: var(--ps-danger);
+}
+
+[hidden] {
+  display: none !important;
+}

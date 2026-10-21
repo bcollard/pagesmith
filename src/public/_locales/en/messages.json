@@ -1,0 +1,191 @@
+{
+  "extName": {
+    "message": "Pagesmith - Full Page Screenshot",
+    "description": "Store listing name and toolbar tooltip fallback. 75 characters max."
+  },
+  "extDescription": {
+    "message": "Capture a whole web page as one image or PDF. Scrolls and stitches for you. Nothing leaves your browser.",
+    "description": "Store summary. Plain text, 132 characters max."
+  },
+  "actionTitle": {
+    "message": "Capture the full page",
+    "description": "Tooltip on the toolbar button."
+  },
+  "popupPreparing": {
+    "message": "Preparing the page…"
+  },
+  "popupCapturing": {
+    "message": "Capturing… $PCT$%",
+    "description": "Progress line in the popup. $PCT$ is a number from 0 to 100.",
+    "placeholders": {
+      "pct": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupHint": {
+    "message": "You can close this popup. The capture continues and opens when it is done."
+  },
+  "popupDone": {
+    "message": "Done. Opening the capture…"
+  },
+  "popupBusy": {
+    "message": "Another capture is still running. Try again when it finishes."
+  },
+  "errRestricted": {
+    "message": "Chrome does not allow extensions to capture this page."
+  },
+  "errFailed": {
+    "message": "The capture failed: $DETAIL$",
+    "description": "$DETAIL$ is a technical error message in English.",
+    "placeholders": {
+      "detail": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNoTab": {
+    "message": "The tab was closed before the capture finished."
+  },
+  "btnRetry": {
+    "message": "Try again"
+  },
+  "btnRecent": {
+    "message": "Recent captures"
+  },
+  "btnOptions": {
+    "message": "Options"
+  },
+  "viewerRecent": {
+    "message": "Recent captures"
+  },
+  "viewerEmpty": {
+    "message": "No captures yet. Click the Pagesmith button on any page to make one."
+  },
+  "viewerNotFound": {
+    "message": "This capture no longer exists. Older captures are deleted automatically."
+  },
+  "viewerDownloadImage": {
+    "message": "Download image"
+  },
+  "viewerDownloadPdf": {
+    "message": "Download PDF"
+  },
+  "viewerCopy": {
+    "message": "Copy"
+  },
+  "viewerCopied": {
+    "message": "Copied to the clipboard"
+  },
+  "viewerCopyMulti": {
+    "message": "This capture is split into several images, so it cannot be copied as one. Download it instead."
+  },
+  "viewerDelete": {
+    "message": "Delete"
+  },
+  "viewerFit": {
+    "message": "Fit to window"
+  },
+  "viewerActual": {
+    "message": "Actual size"
+  },
+  "viewerSize": {
+    "message": "$WIDTH$ × $HEIGHT$ px",
+    "description": "Image size in pixels.",
+    "placeholders": {
+      "width": {
+        "content": "$1"
+      },
+      "height": {
+        "content": "$2"
+      }
+    }
+  },
+  "viewerParts": {
+    "message": "The page is taller than Chrome can encode as one image, so it downloads as $COUNT$ images. The PDF contains all of them.",
+    "description": "$COUNT$ is the number of image files.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "viewerPartialVisible": {
+    "message": "Chrome does not allow scrolling this page, so only the visible area was captured."
+  },
+  "viewerPartialLimit": {
+    "message": "The page is taller than the maximum height set in Options, so the capture stops there."
+  },
+  "optTitle": {
+    "message": "Pagesmith options"
+  },
+  "optSaved": {
+    "message": "Saved"
+  },
+  "optSectionCapture": {
+    "message": "Capture"
+  },
+  "optSectionExport": {
+    "message": "Export"
+  },
+  "optFixed": {
+    "message": "Fixed headers and floating elements"
+  },
+  "optFixedAfterFirst": {
+    "message": "Show once, at the top"
+  },
+  "optFixedAlways": {
+    "message": "Hide everywhere"
+  },
+  "optFixedNever": {
+    "message": "Leave as they are"
+  },
+  "optPreScroll": {
+    "message": "Scroll through the page first so lazy-loaded images appear"
+  },
+  "optDelay": {
+    "message": "Wait after each scroll (milliseconds)"
+  },
+  "optMaxHeight": {
+    "message": "Maximum page height (pixels)"
+  },
+  "optFormat": {
+    "message": "Image format"
+  },
+  "optFormatPng": {
+    "message": "PNG (lossless)"
+  },
+  "optFormatJpeg": {
+    "message": "JPEG (smaller files)"
+  },
+  "optQuality": {
+    "message": "JPEG quality"
+  },
+  "optPaper": {
+    "message": "PDF page size"
+  },
+  "optPaperFit": {
+    "message": "Fit to content"
+  },
+  "optFilename": {
+    "message": "File name"
+  },
+  "optFilenameHelp": {
+    "message": "Placeholders: {title} {host} {path} {date} {time}"
+  },
+  "optKeep": {
+    "message": "Captures to keep"
+  },
+  "optShortcut": {
+    "message": "Keyboard shortcut"
+  },
+  "optShortcutHelp": {
+    "message": "Change it in Chrome's extension shortcut settings."
+  },
+  "optShortcutOpen": {
+    "message": "Open shortcut settings"
+  },
+  "optPrivacy": {
+    "message": "Captures are stored only in this browser. Pagesmith makes no network requests."
+  }
+}
