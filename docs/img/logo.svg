@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="512" height="512" role="img" aria-label="Pagesmith">
+  <title>Pagesmith</title>
+  <rect width="100" height="100" rx="20.0" ry="20.0" fill="#1D5FA8"/>
+  <g transform="translate(14.000000000000002 14.000000000000002) scale(0.720000)">
+    <path d="M20 0 L62 0 L80 18 L80 33 L20 33 Z" fill="#FFFFFF"/>
+    <path d="M20 42 L80 42 L80 63 L20 63 Z" fill="#FFFFFF"/>
+    <path d="M20 72 L80 72 L80 100 L20 100 Z" fill="#FFFFFF"/>
+  </g>
+</svg>

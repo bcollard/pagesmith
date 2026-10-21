@@ -131,6 +131,24 @@ emit(
   }),
 );
 
+// ---- GitHub Pages site (docs/) ---------------------------------------
+// Copies rather than links into assets/: Pages serves only docs/, and the
+// check below keeps the copies from drifting.
+emit('docs/img/logo.svg', Buffer.from(svg({ size: 512 })));
+emit('docs/img/icon128.png', icon(128));
+emit(
+  'docs/img/og.png',
+  render({
+    width: 1200,
+    height: 630,
+    glyphSize: 320,
+    tileColor: PALETTE.tile,
+    glyphColor: PALETTE.glyph,
+    rounded: true,
+    background: PALETTE.paper,
+  }),
+);
+
 // ---- Chrome Web Store assets ----------------------------------------
 // 440x280 small promo tile (search results) and 1400x560 marquee (featured
 // placement). Sizes per the current Web Store listing requirements.

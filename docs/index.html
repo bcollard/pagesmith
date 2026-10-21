@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Pagesmith – Full page screenshots in Chrome, kept on your machine</title>
+<meta name="description" content="A Chrome extension that captures a whole web page as one image or PDF. Scrolls and stitches automatically. No network requests, no site access at install, open source.">
+<link rel="canonical" href="https://bcollard.github.io/pagesmith/">
+<link rel="icon" href="img/icon128.png" type="image/png">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pagesmith – Full page screenshots in Chrome, kept on your machine">
+<meta property="og:description" content="Capture the whole page as one PNG, JPEG or PDF. No network requests, no site access at install, and releases you can rebuild byte for byte.">
+<meta property="og:url" content="https://bcollard.github.io/pagesmith/">
+<meta property="og:image" content="https://bcollard.github.io/pagesmith/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Structured data, so the page can surface for queries the Web Store
+     listing itself cannot carry. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Pagesmith – Full Page Screenshot",
+  "applicationCategory": "UtilitiesApplication",
+  "applicationSubCategory": "Chrome Extension",
+  "operatingSystem": "Chrome, Edge, Brave, Chromium",
+  "url": "https://bcollard.github.io/pagesmith/",
+  "downloadUrl": "https://github.com/bcollard/pagesmith/releases/latest",
+  "softwareVersion": "0.1.0",
+  "image": "https://bcollard.github.io/pagesmith/img/og.png",
+  "description": "A Chrome extension that captures the full length of a web page as one image or PDF by scrolling it and joining the captured frames. Captures stay on the machine; the extension makes no network requests.",
+  "license": "https://opensource.org/licenses/MIT",
+  "codeRepository": "https://github.com/bcollard/pagesmith",
+  "featureList": [
+    "Capture the whole page, top to bottom, as one image",
+    "Fixed headers and sticky bars shown once instead of on every screen",
+    "Lazy-loaded images loaded before capturing",
+    "Inner scrolling panels of web apps captured in full",
+    "PNG, JPEG, PDF (A4, Letter, fit to content) and copy to clipboard",
+    "No network requests and no site access at install",
+    "Reproducible builds with GitHub provenance attestation"
+  ],
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Person", "name": "Baptiste Collard", "url": "https://github.com/bcollard" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why does the sticky header appear only once?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A full-page capture is made of many screenfuls. Left alone, a fixed header appears at the top of each one. Pagesmith keeps fixed elements in the first frame and hides them for the rest, and turns sticky elements into ordinary ones for the duration of the capture so they appear where they sit in the page. Both behaviours can be changed in Options."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why did a long page download as several images?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Chrome cannot encode an image taller than about 16,000 pixels reliably; above that a canvas can silently come out blank. Pagesmith splits such pages into several images, numbered in page order, and the PDF export contains all of them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why can it not capture some pages?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Chrome does not allow any extension to capture its own pages, such as chrome://settings, or other extensions' pages. On the Chrome Web Store, extensions can take a picture of the screen but cannot scroll the page, so only the visible area is captured there."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does closing the popup cancel the capture?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The capture runs in the extension's background worker. The popup only shows progress, and the toolbar icon shows a percentage while it runs. The capture opens in a new tab when it is done."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I check that the extension I installed matches the source?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Every release is reproducible and carries a GitHub provenance attestation. Download the release, run gh attestation verify to confirm it came from this repository and commit, then rebuild from the same tag and compare the bytes. The shipped bundle is not minified, so it can also be read directly."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Everything below is inline. No fonts, stylesheets, scripts or images are
+     fetched from anywhere else: the same promise the extension makes. -->
+<style>
+  :root {
+    --accent:   #1d5fa8;
+    --accent-d: #164a83;
+    --ink:      #14161a;
+    --muted:    #545c68;
+    --line:     #d6dde6;
+    --bg:       #f3f7fc;
+    --bg-alt:   #ffffff;
+    --code-bg:  rgba(20, 22, 26, .06);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --accent:   #6aa7ea;
+      --accent-d: #8dbcf0;
+      --ink:      #e8ebef;
+      --muted:    #9aa4b2;
+      --line:     #2e3540;
+      --bg:       #12151a;
+      --bg-alt:   #1a1e24;
+      --code-bg:  rgba(232, 235, 239, .08);
+    }
+  }
+
+  * { box-sizing: border-box }
+
+  body {
+    margin: 0;
+    font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 62rem; margin: 0 auto; padding: 0 1.25rem }
+
+  a { color: var(--accent); text-underline-offset: 2px }
+  a:hover { color: var(--accent-d) }
+
+  code, pre { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace }
+  code { font-size: .875em; background: var(--code-bg); padding: .15em .4em; border-radius: 4px }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1rem 1.1rem;
+    overflow-x: auto;
+    font-size: .84rem;
+    line-height: 1.6;
+  }
+  pre code { background: none; padding: 0; font-size: inherit }
+
+  .hero { text-align: center; padding: 4.5rem 0 3.5rem; border-bottom: 1px solid var(--line) }
+  .hero img.mark { width: 76px; height: 76px; border-radius: 16px }
+  .hero h1 { font-size: clamp(2.1rem, 5vw, 3rem); margin: 1.1rem 0 .5rem; letter-spacing: -.02em }
+  .tagline { font-size: clamp(1.05rem, 2.2vw, 1.3rem); color: var(--muted); max-width: 36rem; margin: 0 auto 2rem }
+  .cta { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap }
+  .btn {
+    display: inline-block;
+    padding: .7rem 1.35rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: .95rem;
+    text-decoration: none;
+    border: 1px solid var(--accent);
+  }
+  .btn-primary { background: var(--accent); color: #fff }
+  .btn-primary:hover { background: var(--accent-d); border-color: var(--accent-d); color: #fff }
+  .btn-ghost { color: var(--accent); background: transparent }
+  .note { font-size: .85rem; color: var(--muted); margin-top: 1rem }
+
+  section { padding: 3.25rem 0; border-bottom: 1px solid var(--line) }
+  section.alt { background: var(--bg-alt) }
+  h2 { font-size: 1.55rem; margin: 0 0 .5rem; letter-spacing: -.01em }
+  h3 { font-size: 1.05rem; margin: 1.75rem 0 .35rem }
+  .lede { color: var(--muted); margin: 0 0 1.75rem; max-width: 46rem }
+  p { max-width: 46rem }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.5rem 2rem;
+    margin-top: 1.5rem;
+  }
+  .grid h3 { margin-top: 0 }
+  .grid p { margin: 0; font-size: .93rem; color: var(--muted) }
+
+  table { border-collapse: collapse; width: 100%; max-width: 46rem; font-size: .95rem }
+  th, td { text-align: left; padding: .55rem .75rem; border-bottom: 1px solid var(--line); vertical-align: top }
+  th { font-weight: 600 }
+
+  ul.plain { list-style: none; padding: 0; max-width: 46rem }
+  ul.plain li { padding: .45rem 0 .45rem 1.6rem; position: relative }
+  ul.plain li::before {
+    content: "";
+    position: absolute; left: 0; top: 1.05em;
+    width: .5rem; height: .5rem; border-radius: 50%;
+    background: var(--accent);
+  }
+
+  dl.faq { max-width: 46rem }
+  dl.faq dt { font-weight: 600; margin-top: 1.5rem }
+  dl.faq dd { margin: .35rem 0 0; color: var(--muted) }
+
+  footer { padding: 2.5rem 0 3.5rem; font-size: .9rem; color: var(--muted); text-align: center }
+  footer a { color: var(--muted) }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <img class="mark" src="img/logo.svg" width="76" height="76" alt="">
+    <h1>Pagesmith</h1>
+    <p class="tagline">
+      Full-page screenshots for Chrome. One click captures the whole page, top to
+      bottom, as one image or PDF. Nothing leaves your browser.
+    </p>
+    <div class="cta">
+      <a class="btn btn-primary" href="#install">Install</a>
+      <a class="btn btn-ghost" href="https://github.com/bcollard/pagesmith">Source on GitHub</a>
+    </div>
+    <p class="note">Free and MIT licensed. Not yet on the Chrome Web Store.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>Captures stay on your machine</h2>
+    <p class="lede">
+      A screenshot tool sees whatever you were looking at: mail, statements,
+      internal dashboards. So Pagesmith makes no network requests at all.
+    </p>
+    <ul class="plain">
+      <li>The shipped code contains no <code>fetch</code>, <code>XMLHttpRequest</code>, <code>WebSocket</code> or remote stylesheet. A check in the build pipeline scans the built extension and fails if one appears.</li>
+      <li>Captures are stored in the extension's own storage on your computer. The newest 20 are kept by default and older ones are deleted automatically.</li>
+      <li>No analytics, no account, no server.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2>It asks for no sites when you install it</h2>
+    <p class="lede">No “read and change all your data on all websites” prompt.</p>
+    <p>
+      Pagesmith uses Chrome's <code>activeTab</code> permission. It can access a tab only
+      after you click its button or press its shortcut on that tab, and only until you
+      navigate away. The full permission list is three entries:
+    </p>
+    <table>
+      <thead><tr><th>Permission</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td><code>activeTab</code></td><td>Access to the tab you clicked the button on, to capture it.</td></tr>
+        <tr><td><code>scripting</code></td><td>Scrolls that tab step by step during the capture, then puts it back.</td></tr>
+        <tr><td><code>storage</code></td><td>Your settings, and the progress of a running capture.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What it does</h2>
+    <div class="grid">
+      <div>
+        <h3>The whole page</h3>
+        <p>Scrolls one screen at a time and joins the frames into one image, at your screen's full resolution.</p>
+      </div>
+      <div>
+        <h3>Headers shown once</h3>
+        <p>Fixed headers, cookie bars and chat buttons appear at the top, not on every screen. Configurable.</p>
+      </div>
+      <div>
+        <h3>Lazy images loaded</h3>
+        <p>The page is scrolled through once before capturing, so images that load on scroll are there.</p>
+      </div>
+      <div>
+        <h3>Web apps too</h3>
+        <p>Mail, chat and dashboards that scroll an inner panel instead of the page are detected and captured in full.</p>
+      </div>
+      <div>
+        <h3>PNG, JPEG, PDF, clipboard</h3>
+        <p>PDF in A4, Letter or fit-to-content sizes. Very tall pages are split into several images, all included in the PDF.</p>
+      </div>
+      <div>
+        <h3>Runs in the background</h3>
+        <p>Closing the popup does not cancel the capture. Progress shows on the toolbar icon.</p>
+      </div>
+    </div>
+    <p class="note" style="text-align:left">English, French, German, Spanish and Japanese. Default shortcut: <code>Alt+Shift+S</code>.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2 id="verify">You can check the build yourself</h2>
+    <p class="lede">
+      The Web Store signs the package itself with a key the developer never holds, so a
+      store signature says nothing about which source the bytes came from.
+    </p>
+    <p>Every Pagesmith release is reproducible, so you can rebuild it and compare:</p>
+<pre><code>git clone https://github.com/bcollard/pagesmith.git &amp;&amp; cd pagesmith
+git checkout v0.1.0
+nvm use            # the Node version affects the output
+npm ci
+node scripts/verify-reproducible.mjs ~/Downloads/pagesmith-0.1.0.zip</code></pre>
+    <p>Each release also carries a provenance attestation binding those exact bytes to a commit:</p>
+<pre><code>gh attestation verify pagesmith-0.1.0.zip --repo bcollard/pagesmith</code></pre>
+    <p>
+      The shipped bundle is <strong>not minified</strong> and has no third-party code. The
+      whole extension is about 80 KB of readable JavaScript.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Questions</h2>
+    <dl class="faq">
+      <dt>Why does the sticky header appear only once?</dt>
+      <dd>
+        Pagesmith keeps fixed elements in the first frame and hides them for the rest, and
+        turns sticky elements into ordinary ones during the capture so they appear where
+        they sit in the page. Both can be changed in Options.
+      </dd>
+
+      <dt>Why did a long page download as several images?</dt>
+      <dd>
+        Chrome cannot reliably encode an image taller than about 16,000 pixels. Above that
+        a canvas can come out blank without an error. Such pages are split into several
+        numbered images, and the PDF contains all of them.
+      </dd>
+
+      <dt>Why can it not capture some pages?</dt>
+      <dd>
+        Chrome does not allow any extension to capture <code>chrome://</code> pages or other
+        extensions' pages. On the Chrome Web Store, extensions cannot scroll the page, so
+        only the visible area is captured there.
+      </dd>
+
+      <dt>Does closing the popup cancel the capture?</dt>
+      <dd>
+        No. The capture runs in the extension's background worker and opens in a new tab
+        when it is done.
+      </dd>
+
+      <dt>How do I check that what I installed matches the source?</dt>
+      <dd>
+        Run <code>gh attestation verify</code> on the release, then rebuild from the same
+        tag and compare. The commands are <a href="#verify">above</a>.
+      </dd>
+    </dl>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2 id="install">Install</h2>
+    <p class="lede">Not yet on the Chrome Web Store. Until then, build it from source:</p>
+<pre><code>git clone https://github.com/bcollard/pagesmith.git &amp;&amp; cd pagesmith
+npm ci
+npm run build</code></pre>
+    <ul class="plain">
+      <li>Open <code>chrome://extensions</code></li>
+      <li>Turn on <strong>Developer mode</strong>, top right</li>
+      <li>Click <strong>Load unpacked</strong> and select <code>dist/chrome</code></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>
+      <a href="https://github.com/bcollard/pagesmith">Source</a> ·
+      <a href="https://github.com/bcollard/pagesmith/blob/main/SECURITY.md">Security</a> ·
+      <a href="https://github.com/bcollard/pagesmith/issues">Issues</a> ·
+      <a href="privacy.html">Privacy</a>
+    </p>
+    <p>MIT licensed. Built by <a href="https://github.com/bcollard">Baptiste Collard</a>.</p>
+  </div>
+</footer>
+
+</body>
+</html>
