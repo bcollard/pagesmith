@@ -188,3 +188,37 @@ test('exports a PDF the viewer can produce without error', async () => {
   expect(pdf.startsWith('%PDF-1.4')).toBe(true);
   expect(pdf.trimEnd().endsWith('%%EOF')).toBe(true);
 });
+
+test('stops instead of stitching another tab when the user switches tabs', async () => {
+  const control = await context.newPage();
+  await control.goto(`chrome-extension://${extensionId}/options.html`);
+  const fixturePage = context.waitForEvent('page', (p) => p.url().includes('bands.html'));
+  const { tabId, windowId } = await control.evaluate(async (url) => {
+    const win = await chrome.windows.create({ url, width: 1000, height: 800, focused: true });
+    return { tabId: win!.tabs![0]!.id!, windowId: win!.id! };
+  }, `${origin}/bands.html`);
+  await (await fixturePage).waitForLoadState('load');
+
+  await control.evaluate(
+    async ({ tabId, windowId }) => {
+      await chrome.runtime.sendMessage({ type: 'capture:start', tabId });
+      // Let the first frame go through, then open another tab on top.
+      await new Promise((r) => setTimeout(r, 300));
+      await chrome.tabs.create({ windowId, url: 'about:blank', active: true });
+    },
+    { tabId, windowId },
+  );
+
+  const job = await control.evaluate(
+    () =>
+      new Promise<unknown>((resolve) => {
+        const check = async () => {
+          const { job } = (await chrome.storage.session.get('job')) as { job?: { status: string } };
+          if (job && job.status !== 'running') resolve(job);
+          else setTimeout(check, 100);
+        };
+        void check();
+      }),
+  );
+  expect(job).toMatchObject({ status: 'error', error: 'tab-switched', tabId });
+});

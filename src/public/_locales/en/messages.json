@@ -47,6 +47,9 @@
   "errNoTab": {
     "message": "The tab was closed before the capture finished."
   },
+  "errTabSwitched": {
+    "message": "The capture stopped because you switched to another tab. Stay on the page until it finishes."
+  },
   "btnRetry": {
     "message": "Try again"
   },

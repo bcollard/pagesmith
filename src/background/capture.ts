@@ -61,6 +61,19 @@ async function decodeDataUrl(dataUrl: string): Promise<ImageBitmap> {
   return createImageBitmap(new Blob([bytes], { type: 'image/png' }));
 }
 
+/* captureVisibleTab photographs whatever tab is on screen in the window, not a
+   tab by id. The capture outlives the popup, so the user can switch tabs
+   mid-way; without this check the other tab's content would be stitched
+   into the image. */
+async function captureTab(tabId: number, windowId: number): Promise<ImageBitmap> {
+  const current = await getTab(tabId).catch(() => null);
+  if (!current) throw new CaptureError('no-tab', 'the tab is gone');
+  if (!current.active || current.windowId !== windowId) {
+    throw new CaptureError('tab-switched', 'the tab was no longer on screen');
+  }
+  return decodeDataUrl(await captureVisibleTab(windowId));
+}
+
 class TileSet {
   private readonly canvases = new Map<number, OffscreenCanvas>();
   readonly tiles: Rect[];
@@ -173,7 +186,7 @@ async function scrollAndStitch(
       if (hide) await sendToAgent(tab.id, { type: 'agent:hide-fixed' });
       if (settings.captureDelayMs > 0) await sleep(settings.captureDelayMs);
 
-      const frame = await decodeDataUrl(await captureVisibleTab(tab.windowId));
+      const frame = await captureTab(tab.id, tab.windowId);
       if (!tiles) {
         scale = measureScale(frame.width, metrics.window.width);
         tiles = new TileSet({
@@ -205,8 +218,8 @@ async function scrollAndStitch(
 
 /* For pages Chrome will not let any extension script, such as the Web Store:
    one frame of what is on screen is still better than an error. */
-async function captureVisibleOnly(tab: chrome.tabs.Tab) {
-  const frame = await decodeDataUrl(await captureVisibleTab(tab.windowId));
+async function captureVisibleOnly(tab: chrome.tabs.Tab & { id: number }) {
+  const frame = await captureTab(tab.id, tab.windowId);
   const canvas = new OffscreenCanvas(frame.width, frame.height);
   canvas.getContext('2d')!.drawImage(frame, 0, 0);
   const blob = await canvas.convertToBlob({ type: 'image/png' });
@@ -245,7 +258,7 @@ export async function runCapture(tabId: number): Promise<void> {
     };
 
     let body;
-    if (isScriptBlockedButCapturable(tab.url)) body = await captureVisibleOnly(tab);
+    if (isScriptBlockedButCapturable(tab.url)) body = await captureVisibleOnly(withId);
     else if (isRestrictedUrl(tab.url)) throw new CaptureError('restricted-page', tab.url ?? 'no url');
     else body = await captureFullPage(withId, settings, onProgress);
 

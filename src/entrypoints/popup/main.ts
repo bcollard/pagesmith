@@ -71,7 +71,9 @@ function render(job: Job | null, tabId: number | null) {
         ? t('errRestricted')
         : job.error === 'no-tab'
           ? t('errNoTab')
-          : t('errFailed', job.detail);
+          : job.error === 'tab-switched'
+            ? t('errTabSwitched')
+            : t('errFailed', job.detail);
     retry.hidden = job.error === 'restricted-page';
   }
 }

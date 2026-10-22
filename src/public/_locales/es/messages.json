@@ -42,6 +42,9 @@
   "errNoTab": {
     "message": "La pestaña se cerró antes de que terminara la captura."
   },
+  "errTabSwitched": {
+    "message": "La captura se detuvo porque cambiaste a otra pestaña. Quédate en la página hasta que termine."
+  },
   "btnRetry": {
     "message": "Reintentar"
   },

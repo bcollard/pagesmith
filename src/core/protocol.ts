@@ -69,7 +69,7 @@ export const JOB_KEY = 'job';
 /* Why a capture holds less than the full page. */
 export type PartialReason = 'visible-only' | 'height-limit';
 
-export type CaptureErrorCode = 'restricted-page' | 'capture-failed' | 'no-tab';
+export type CaptureErrorCode = 'restricted-page' | 'capture-failed' | 'no-tab' | 'tab-switched';
 
 /* The Web Store refuses scripting from every extension. Matched by hostname
    rather than URL prefix so the bundle carries no external URL literal for

@@ -42,6 +42,9 @@
   "errNoTab": {
     "message": "Der Tab wurde geschlossen, bevor die Aufnahme fertig war."
   },
+  "errTabSwitched": {
+    "message": "Die Aufnahme wurde beendet, weil Sie zu einem anderen Tab gewechselt sind. Bleiben Sie auf der Seite, bis sie fertig ist."
+  },
   "btnRetry": {
     "message": "Erneut versuchen"
   },
