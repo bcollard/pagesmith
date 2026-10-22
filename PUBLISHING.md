@@ -23,6 +23,7 @@ Icons and promo tiles are generated from `scripts/lib/logo.mjs`:
 
 ```bash
 npm run icons
+npm run screenshots   # builds, then captures a demo page with the real extension
 ```
 
 | Asset | Size | Where |
@@ -31,7 +32,7 @@ npm run icons
 | Store icon | 128 × 128 | `assets/store/store-icon-128.png` |
 | Small promo tile | 440 × 280 | `assets/store/promo-small-440x280.png` |
 | Marquee promo tile | 1400 × 560 | `assets/store/promo-marquee-1400x560.png` |
-| Screenshots | 1280 × 800 exactly | `assets/store/screenshots/` (to be produced) |
+| Screenshots | 1280 × 800 exactly | `assets/store/screenshots/`, from `npm run screenshots` |
 
 Screenshots must be exactly 1280 × 800 or 640 × 400. A DevTools capture on a
 Retina display is written at 2560 × 1600, and the store rejects it with an
