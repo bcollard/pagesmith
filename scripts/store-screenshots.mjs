@@ -91,7 +91,7 @@ async function shootExtension() {
       const v = Number(document.querySelector('[role=progressbar]')?.getAttribute('aria-valuenow'));
       return v >= 45 && v < 90;
     }, null, { timeout: 60_000, polling: 50 });
-    const popupShot = await popup.locator('main').screenshot({ scale: 'css' });
+    const popupShot = await popup.locator('main').screenshot({ scale: 'device' });
 
     const viewer = await viewerOpened;
     await viewer.waitForSelector('#image img');
@@ -109,19 +109,19 @@ async function shootExtension() {
 
     await demo.setViewportSize({ width: 1100, height: 700 });
     await demo.evaluate(() => window.scrollTo(0, 0));
-    const demoShot = await demo.screenshot({ scale: 'css' });
+    const demoShot = await demo.screenshot({ scale: 'device' });
 
     await viewer.setViewportSize({ width: W, height: H });
     await viewer.bringToFront();
-    const viewerShot = await viewer.screenshot({ scale: 'css' });
+    const viewerShot = await viewer.screenshot({ scale: 'device' });
     await viewer.emulateMedia({ colorScheme: 'dark' });
-    const viewerDarkShot = await viewer.screenshot({ scale: 'css' });
+    const viewerDarkShot = await viewer.screenshot({ scale: 'device' });
 
     const options = await context.newPage();
     await options.setViewportSize({ width: W, height: H });
     await options.goto(`${ext}/options.html`);
     await options.waitForLoadState('load');
-    const optionsShot = await options.screenshot({ scale: 'css' });
+    const optionsShot = await options.screenshot({ scale: 'device' });
 
     return { popupShot, capture, demoShot, viewerShot, viewerDarkShot, optionsShot };
   } finally {
@@ -208,6 +208,9 @@ async function compose(shots) {
   const browser = await chromium.launch();
   try {
     const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
+    // The site lets visitors zoom into the screenshots, so its copies are
+    // rendered at twice the size from the same device-pixel source shots.
+    const sitePage = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 2 });
     const stages = [
       ['1-whole-page.png', stageHero(shots)],
       ['2-viewer.png', stageFramed(shots.viewerShot, 'Download, copy or save as PDF',
@@ -223,12 +226,15 @@ async function compose(shots) {
       await mkdir(dir, { recursive: true });
     }
     for (const [name, body] of stages) {
-      await page.setContent(`<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head><body>${body}</body></html>`);
-      await page.evaluate(() => Promise.all([...document.images].map((i) => i.decode())));
+      const html = `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head><body>${body}</body></html>`;
+      for (const pg of [page, sitePage]) {
+        await pg.setContent(html);
+        await pg.evaluate(() => Promise.all([...document.images].map((i) => i.decode())));
+      }
       await page.screenshot({ path: path.join(outDir, name) });
       console.log(`wrote assets/store/screenshots/${name}`);
       const jpg = name.replace(/\.png$/, '.jpg');
-      await page.screenshot({ path: path.join(siteDir, jpg), type: 'jpeg', quality: 85 });
+      await sitePage.screenshot({ path: path.join(siteDir, jpg), type: 'jpeg', quality: 85 });
       console.log(`wrote docs/img/screenshots/${jpg}`);
     }
   } finally {
