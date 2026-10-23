@@ -2,6 +2,7 @@
   <img src="assets/logo.svg" width="96" height="96" alt="">
   <h1>Pagesmith</h1>
   <p><strong>A full-page screenshot extension for Chrome. One click captures the whole page as one image or PDF. Nothing leaves your browser.</strong></p>
+  <p><a href="https://chromewebstore.google.com/detail/nclcaennencgjadomnglkibooebeipjb">Install from the Chrome Web Store</a> · <a href="https://bcollard.github.io/pagesmith/">Website</a></p>
 </div>
 
 ---

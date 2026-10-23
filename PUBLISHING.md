@@ -2,6 +2,22 @@
 
 From a tagged release to a live listing.
 
+## Published listing
+
+| | |
+| --- | --- |
+| Extension ID | `nclcaennencgjadomnglkibooebeipjb` |
+| Store page | https://chromewebstore.google.com/detail/nclcaennencgjadomnglkibooebeipjb |
+| First published | 0.1.0, October 2026 |
+
+Every update goes to this listing. A new listing is a different extension
+to every existing user, with no way to move them across.
+
+Users with Enhanced Safe Browsing see "This extension is not trusted by
+Enhanced Safe Browsing" when installing. Chrome shows it for developers
+without a few months of policy-compliant history, and it clears on its own.
+No change to the extension removes it.
+
 ## How signing works
 
 You never sign anything. You upload a plain `.zip`, and Google signs it into a
@@ -113,6 +129,7 @@ Answer **no** to every data-use question.
 
 ## After it is published
 
-1. Put the store link in `README.md`.
-2. Record the extension ID. Updates must go to the same listing; a new listing
-   is a different extension to every existing user.
+For a first listing only:
+
+1. Put the store link in `README.md` and `docs/index.html`.
+2. Record the extension ID under "Published listing" above.
