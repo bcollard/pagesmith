@@ -205,6 +205,21 @@
   dl.faq dt { font-weight: 600; margin-top: 1.5rem }
   dl.faq dd { margin: .35rem 0 0; color: var(--muted) }
 
+  .shot { display: block; margin: 0; }
+  .shot img {
+    display: block; width: 100%; height: auto;
+    border-radius: 10px; border: 1px solid var(--line);
+    box-shadow: 0 12px 36px rgba(20, 40, 70, .14);
+  }
+  .shot figcaption { font-size: .9rem; color: var(--muted); margin-top: .6rem }
+  .hero .shot { max-width: 52rem; margin: 2.75rem auto 0 }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 1.75rem;
+    margin-top: 1.5rem;
+  }
+
   footer { padding: 2.5rem 0 3.5rem; font-size: .9rem; color: var(--muted); text-align: center }
   footer a { color: var(--muted) }
 </style>
@@ -224,8 +239,36 @@
       <a class="btn btn-ghost" href="https://github.com/bcollard/pagesmith">Source on GitHub</a>
     </div>
     <p class="note">Free and MIT licensed. Works in Chrome, Edge, Brave and other Chromium browsers.</p>
+    <a class="shot" href="img/screenshots/1-whole-page.jpg">
+      <img src="img/screenshots/1-whole-page.jpg" width="1280" height="800"
+           alt="The Pagesmith popup showing capture progress on a long article, next to the finished capture of the whole page as one image">
+    </a>
   </div>
 </header>
+
+<section class="alt">
+  <div class="wrap">
+    <h2>Screenshots</h2>
+    <p class="lede">The same images as the Chrome Web Store listing, made with the released extension.</p>
+    <div class="gallery">
+      <figure class="shot">
+        <a href="img/screenshots/2-viewer.jpg"><img src="img/screenshots/2-viewer.jpg" width="1280" height="800" loading="lazy"
+             alt="The capture viewer with buttons to copy, download as PDF or download as an image"></a>
+        <figcaption>The viewer: download PNG or JPEG, save a PDF, or copy to the clipboard.</figcaption>
+      </figure>
+      <figure class="shot">
+        <a href="img/screenshots/3-dark-mode.jpg"><img src="img/screenshots/3-dark-mode.jpg" width="1280" height="800" loading="lazy"
+             alt="The capture viewer in dark mode"></a>
+        <figcaption>Follows the system light or dark theme.</figcaption>
+      </figure>
+      <figure class="shot">
+        <a href="img/screenshots/4-options.jpg"><img src="img/screenshots/4-options.jpg" width="1280" height="800" loading="lazy"
+             alt="The Pagesmith options page"></a>
+        <figcaption>Options: floating elements, image format, PDF size, file names.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
 
 <section>
   <div class="wrap">

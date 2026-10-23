@@ -23,6 +23,9 @@ const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const extensionPath = path.join(root, 'dist', 'chrome-granted');
 const demoPath = path.join(root, 'scripts', 'store-screenshots', 'demo.html');
 const outDir = path.join(root, 'assets', 'store', 'screenshots');
+// JPEG copies for the GitHub Pages site, where PNGs would be several times
+// the download for no visible difference.
+const siteDir = path.join(root, 'docs', 'img', 'screenshots');
 const W = 1280;
 const H = 800;
 
@@ -215,13 +218,18 @@ async function compose(shots) {
         'Image format and quality, how floating headers are handled, file names, PDF paper size, and how many captures to keep.')],
       ['5-privacy.png', stagePrivacy()],
     ];
-    await rm(outDir, { recursive: true, force: true });
-    await mkdir(outDir, { recursive: true });
+    for (const dir of [outDir, siteDir]) {
+      await rm(dir, { recursive: true, force: true });
+      await mkdir(dir, { recursive: true });
+    }
     for (const [name, body] of stages) {
       await page.setContent(`<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head><body>${body}</body></html>`);
       await page.evaluate(() => Promise.all([...document.images].map((i) => i.decode())));
       await page.screenshot({ path: path.join(outDir, name) });
       console.log(`wrote assets/store/screenshots/${name}`);
+      const jpg = name.replace(/\.png$/, '.jpg');
+      await page.screenshot({ path: path.join(siteDir, jpg), type: 'jpeg', quality: 85 });
+      console.log(`wrote docs/img/screenshots/${jpg}`);
     }
   } finally {
     await browser.close();
