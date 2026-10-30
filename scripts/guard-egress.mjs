@@ -154,8 +154,11 @@ for (const file of files) {
       failures.push(`${name}: <link rel="${m[1]}"> to ${href}`);
     }
 
-    /* Inline <script> gets the same primitive scan as a .js file. */
-    const scriptRe = /<script\b[^>]*>([\s\S]*?)<\/script>/gi;
+    /* Inline <script> gets the same primitive scan as a .js file. The end
+       tag is matched the way the HTML tokenizer ends script data: `</script`
+       followed by whitespace, `/` or `>` (so `</script >` counts), or end of
+       file for an unclosed script, which the browser still runs. */
+    const scriptRe = /<script\b[^>]*>([\s\S]*?)(?:<\/script[\t\n\f\r />]|$)/gi;
     while ((m = scriptRe.exec(source)) !== null) {
       const { code } = scanJs(m[1]);
       for (const { re, name: primitive } of NETWORK_PRIMITIVES) {
