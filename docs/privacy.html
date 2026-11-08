@@ -3,6 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google tag (gtag.js): counts visits to this website. The extension sends nothing. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MGG4JN8GE6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-MGG4JN8GE6');
+    </script>
     <title>Privacy policy – Pagesmith</title>
     <meta name="description" content="Pagesmith collects nothing, sends nothing and has no server. What the Chrome extension stores on your computer, and how it accesses pages." />
     <link rel="canonical" href="https://bcollard.github.io/pagesmith/privacy.html" />
@@ -15,7 +23,7 @@
   </head>
   <body>
     <h1>Pagesmith privacy policy</h1>
-    <p>Last updated: 21 October 2026</p>
+    <p>Last updated: 8 November 2026</p>
 
     <h2>Summary</h2>
     <p>Pagesmith collects nothing, sends nothing and has no server.</p>
@@ -32,6 +40,9 @@
 
     <h2>Page access</h2>
     <p>Pagesmith uses Chrome's <code>activeTab</code> permission. It can access a tab only after you click its toolbar button or press its shortcut on that tab, and only until you navigate away. While capturing, it scrolls the page and temporarily hides floating elements, then puts the page back as it was. It does not read the page's text or content.</p>
+
+    <h2>This website</h2>
+    <p>This policy covers the extension. The website at <code>bcollard.github.io/pagesmith</code> is separate: it uses Google Analytics to count visits, which sets cookies in your browser and sends page views to Google. The extension does not include Google Analytics or any other network code.</p>
 
     <h2>Contact</h2>
     <p>Questions or concerns: open an issue on the project's GitHub repository.</p>
