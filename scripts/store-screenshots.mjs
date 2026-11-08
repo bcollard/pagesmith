@@ -235,7 +235,7 @@ async function compose(shots) {
       console.log(`wrote assets/store/screenshots/${name}`);
       const jpg = name.replace(/\.png$/, '.jpg');
       await sitePage.screenshot({ path: path.join(siteDir, jpg), type: 'jpeg', quality: 85 });
-      console.log(`wrote docs/img/screenshots/${jpg}`);
+      console.log(`wrote docs/img/screenshots/${jpg} (run scripts/web-images.sh to refresh the WebP copies)`);
     }
   } finally {
     await browser.close();
